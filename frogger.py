@@ -60,7 +60,6 @@ score_pen.color("white")
 score_pen.penup()
 score_pen.hideturtle()
 score_pen.goto(-200, 260)
-score_pen.write("Score: 0", align="center", font=("Courier", 24, "normal"))
 
 # lives pen
 lives_pen = turtle.Turtle()
@@ -69,7 +68,6 @@ lives_pen.color("white")
 lives_pen.penup()
 lives_pen.hideturtle()
 lives_pen.goto(200, 260)
-lives_pen.write("lives: {}".format(lives), align="center", font=("Courier", 24, "normal"))
 
 class Car:
     def __init__(self, name, rightward, leftward, speed, ypos, hitbox):
@@ -168,6 +166,8 @@ def exit_menu():
     frog.showturtle()
     car_1.name.showturtle()
     wn.bgpic("pictures/road.gif")
+    score_pen.write("Score: 0", align="center", font=("Courier", 24, "normal"))
+    lives_pen.write("lives: {}".format(lives), align="center", font=("Courier", 24, "normal"))
     wn.onkey(None, "Up")
     wn.onkey(None, "Down")
     wn.onkey(None, "Space")
@@ -178,6 +178,8 @@ def open_menu():
     title_pen.write("Welcome to Frogger", align="center", font=("Courier", 24, "normal"))
     start_pen.write("Start", align="center", font=("Courier", 24, "bold"))
     exit_pen.write("Exit", align="center", font=("Courier", 24, "normal"))
+    score_pen.clear()
+    lives_pen.clear()
     frog.hideturtle()
     wn.bgpic("nopic")
     wn.bgcolor("black")
@@ -188,6 +190,7 @@ def open_menu():
     lives = 3
     for i in cars:
         i.name.hideturtle()
+        i.name.goto(650, i.ypos)
     global at_menu
     at_menu = True
 
