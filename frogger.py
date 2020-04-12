@@ -72,12 +72,13 @@ lives_pen.goto(200, 260)
 lives_pen.write("lives: {}".format(lives), align="center", font=("Courier", 24, "normal"))
 
 class Car:
-    def __init__(self, name, rightward, leftward, speed, ypos):
+    def __init__(self, name, rightward, leftward, speed, ypos, hitbox):
         self.name = name
         self.rightward = rightward
         self.leftward = leftward
         self.speed = speed
         self.ypos = ypos
+        self.hitbox = hitbox
 
     def set_car(self):
         self.name = turtle.Turtle()
@@ -92,35 +93,35 @@ class Car:
         self.name.dx = self.speed
 
 # car 1
-car_1 = Car("car1", "pictures/car1.gif", "pictures/car1.2.gif", 1.5, -150)
+car_1 = Car("car1", "pictures/car1.gif", "pictures/car1.2.gif", 1.5, -150, 62)
 car_1.set_car()
 
 # car 2
-car_2 = Car("car2", "pictures/car2.gif", "pictures/car2.2.gif", 1, -100)
+car_2 = Car("car2", "pictures/car2.gif", "pictures/car2.2.gif", 1, -100, 50)
 car_2.set_car()
 
 # car 3
-car_3 = Car("car3", "pictures/car3.gif", "pictures/car3.2.gif", 2, -50)
+car_3 = Car("car3", "pictures/car3.gif", "pictures/car3.2.gif", 2, -50, 58)
 car_3.set_car()
 
 # car 4
-car_4 = Car("car4", "pictures/car4.gif", "pictures/car4.2.gif", 1.3, 0)
+car_4 = Car("car4", "pictures/car4.gif", "pictures/car4.2.gif", 1.3, 0, 77)
 car_4.set_car()
 
 # car 5
-car_5 = Car("car5", "pictures/bus1.gif", "pictures/bus1.2.gif", 1.4, 50)
+car_5 = Car("car5", "pictures/bus1.gif", "pictures/bus1.2.gif", 1.4, 50, 102)
 car_5.set_car()
 
 # car 6
-car_6 = Car("car6", "pictures/truck1.gif", "pictures/truck1.2.gif", 1.7, 100)
+car_6 = Car("car6", "pictures/truck1.gif", "pictures/truck1.2.gif", 1.7, 100, 85)
 car_6.set_car()
 
 # car 7
-car_7 = Car("car7", "pictures/car5.gif", "pictures/car5.2.gif", 1.6, 150)
+car_7 = Car("car7", "pictures/car5.gif", "pictures/car5.2.gif", 1.6, 150, 69)
 car_7.set_car()
 
 # car 8
-car_8 = Car("car8", "pictures/bus2.gif", "pictures/bus2.2.gif", 1.2, 200)
+car_8 = Car("car8", "pictures/bus2.gif", "pictures/bus2.2.gif", 1.2, 200, 87)
 car_8.set_car()
 
 # function
@@ -325,8 +326,8 @@ while True:
                 change_speed(car_8.name)
 
     # hit detection
-    car_hitboxes = {car_1: 62, car_2: 50, car_3: 58, car_4: 77, car_5: 102, car_6: 85, car_7: 69, car_8: 87}
+    cars = [car_1, car_2, car_3, car_4, car_5, car_6, car_7, car_8]
 
-    for i, j in car_hitboxes.items():
-        if frog.xcor() > i.name.xcor() - j and frog.xcor() < i.name.xcor() + j and frog.ycor() < i.name.ycor() + 35 and frog.ycor() > i.name.ycor() - 45:
+    for i in cars:
+        if frog.xcor() > i.name.xcor() - i.hitbox and frog.xcor() < i.name.xcor() + i.hitbox and frog.ycor() < i.name.ycor() + 35 and frog.ycor() > i.name.ycor() - 45:
             lives = lose_life(lives)
