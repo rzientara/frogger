@@ -174,6 +174,23 @@ def exit_menu():
     global  at_menu
     at_menu = False
 
+def open_menu():
+    title_pen.write("Welcome to Frogger", align="center", font=("Courier", 24, "normal"))
+    start_pen.write("Start", align="center", font=("Courier", 24, "bold"))
+    exit_pen.write("Exit", align="center", font=("Courier", 24, "normal"))
+    frog.hideturtle()
+    wn.bgpic("nopic")
+    wn.bgcolor("black")
+    global score
+    global lives
+    global cars
+    score = 0
+    lives = 3
+    for i in cars:
+        i.name.hideturtle()
+    global at_menu
+    at_menu = True
+
 # keyboard binding
 wn.listen()
 wn.onkey(frog_up, "w")
@@ -328,3 +345,6 @@ while True:
     for i in cars:
         if frog.xcor() > i.name.xcor() - i.hitbox and frog.xcor() < i.name.xcor() + i.hitbox and frog.ycor() < i.name.ycor() + 35 and frog.ycor() > i.name.ycor() - 45:
             lives = lose_life(lives)
+
+    if lives < 0:
+        open_menu()
