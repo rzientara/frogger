@@ -26,7 +26,7 @@ frog.goto(0, -300)
 frog.tilt(90)
 frog.hideturtle()
 
-"""# title pen
+# title pen
 title_pen = turtle.Turtle()
 title_pen.speed(0)
 title_pen.color("white")
@@ -51,7 +51,7 @@ exit_pen.color("white")
 exit_pen.penup()
 exit_pen.hideturtle()
 exit_pen.goto(0, -20)
-exit_pen.write("Exit", align="center", font=("Courier", 24, "normal"))"""
+exit_pen.write("Exit", align="center", font=("Courier", 24, "normal"))
 
 # score pen
 score_pen = turtle.Turtle()
@@ -143,7 +143,7 @@ def change_speed(car):
     else:
         car.dx = random.uniform(-1, -2)
 
-"""def menu_up():
+def menu_up():
     start_pen.clear()
     start_pen.color("light green")
     start_pen.write("Start", align="center", font=("Courier", 24, "bold"))
@@ -162,13 +162,17 @@ def menu_down():
     start_pen.write("Start", align="center", font=("Courier", 24, "normal"))
 
 def exit_menu():
-    title_pen.hideturtle()
-    start_pen.hideturtle()
-    exit_pen.hideturtle()
+    title_pen.clear()
+    start_pen.clear()
+    exit_pen.clear()
     frog.showturtle()
-    car_1.showturtle()
+    car_1.name.showturtle()
     wn.bgpic("pictures/road.gif")
-    return False"""
+    wn.onkey(None, "Up")
+    wn.onkey(None, "Down")
+    wn.onkey(None, "Space")
+    global  at_menu
+    at_menu = False
 
 # keyboard binding
 wn.listen()
@@ -178,18 +182,11 @@ wn.onkey(frog_up, "w")
 while True:
     wn.update()
 
-    """while at_menu:
+    while at_menu:
         wn.update()
         wn.onkey(menu_up, "Up")
         wn.onkey(menu_down, "Down")
-        if wn.onkey(exit_menu, "space"):
-            at_menu = False
-            exit_menu()"""
-
-    # !! remove when menu is working !!
-    frog.showturtle()
-    car_1.name.showturtle()
-    wn.bgpic("pictures/road.gif")
+        wn.onkey(exit_menu, "space")
 
     # score
     if frog.ycor() > 250:
