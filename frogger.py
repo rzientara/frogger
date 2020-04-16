@@ -53,6 +53,14 @@ exit_pen.hideturtle()
 exit_pen.goto(0, -20)
 exit_pen.write("Exit", align="center", font=("Courier", 24, "normal"))
 
+# high score pen
+high_score_pen = turtle.Turtle()
+high_score_pen.speed(0)
+high_score_pen.color("light green")
+high_score_pen.penup()
+high_score_pen.hideturtle()
+high_score_pen.goto(0, 20)
+
 # score pen
 score_pen = turtle.Turtle()
 score_pen.speed(0)
@@ -189,28 +197,31 @@ def open_menu():
     title_pen.write("Welcome to Frogger", align="center", font=("Courier", 24, "normal"))
     start_pen.write("Start", align="center", font=("Courier", 24, "bold"))
     exit_pen.write("Exit", align="center", font=("Courier", 24, "normal"))
-    wn.bgpic("nopic")
-    wn.bgcolor("black")
-    score_pen.clear()
-    lives_pen.clear()
-    frog.hideturtle()
-    global cars
-    for i in cars:
-        i.name.hideturtle()
-        i.name.goto(650, i.ypos)
-
-    # reset score and lives
-    global score
-    global lives
-    score = 0
-    lives = 3
-
-    # disable frog key
-    wn.onkey(None, "w")
 
     global at_menu
     at_menu = True
 
+def letter_up():
+    global letter_number
+
+    if letter_number == 25:
+        letter_number = 0
+    else:
+        letter_number += 1
+
+def letter_down():
+    global letter_number
+
+    if letter_number == 0:
+        letter_number = 25
+    else:
+        letter_number -= 1
+
+def select_letter():
+    global letter_amount
+    global letters_chosen
+
+    letter_amount += 1
 
 
 # keyboard binding
@@ -367,5 +378,43 @@ while True:
         if frog.xcor() > i.name.xcor() - i.hitbox and frog.xcor() < i.name.xcor() + i.hitbox and frog.ycor() < i.name.ycor() + 35 and frog.ycor() > i.name.ycor() - 45:
             lives = lose_life(lives)
 
-    if lives < 0:
+    if lives < 4:
+        wn.bgpic("nopic")
+        wn.bgcolor("black")
+        score_pen.clear()
+        lives_pen.clear()
+        frog.hideturtle()
+        for i in cars:
+            i.name.hideturtle()
+            i.name.goto(650, i.ypos)
+
+        # disable frog key
+        wn.onkey(None, "w")
+
+        letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+        letters_chosen = ["_", "_", "_"]
+        letter_amount = 0
+        letter_number = 0
+
+        high_score_s = True
+        while high_score_s:
+            if letter_amount < 3:
+                wn.onkey(letter_up, "Up")
+                wn.onkey(letter_down, "Down")
+                wn.onkey(select_letter, "space")
+                wn.update()
+                letters_chosen[letter_amount] = letters[letter_number]
+                title_pen.write("-New High Score-\n Enter name:", align="center", font=("Courier", 24, "normal"))
+                high_score_pen.clear()
+                high_score_pen.write("{}{}{}".format(letters_chosen[0], letters_chosen[1], letters_chosen[2]), align="center", font=("Courier", 24, "normal"))
+            else:
+                letter_number = 0
+                letter_amount = 0
+                title_pen.clear()
+                high_score_pen.clear()
+                high_score_s = False
+                
+        # reset score and lives
+        score = 0
+        lives = 3
         open_menu()
