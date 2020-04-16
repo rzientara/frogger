@@ -91,35 +91,35 @@ class Car:
         self.name.dx = self.speed
 
 # car 1
-car_1 = Car("car1", "pictures/car1.gif", "pictures/car1.2.gif", 1.5, -150, 62)
+car_1 = Car("car1", "pictures/car1.gif", "pictures/car1.2.gif", 1, -150, 62)
 car_1.set_car()
 
 # car 2
-car_2 = Car("car2", "pictures/car2.gif", "pictures/car2.2.gif", 1, -100, 50)
+car_2 = Car("car2", "pictures/car2.gif", "pictures/car2.2.gif", .8, -100, 50)
 car_2.set_car()
 
 # car 3
-car_3 = Car("car3", "pictures/car3.gif", "pictures/car3.2.gif", 2, -50, 58)
+car_3 = Car("car3", "pictures/car3.gif", "pictures/car3.2.gif", 1.5, -50, 58)
 car_3.set_car()
 
 # car 4
-car_4 = Car("car4", "pictures/car4.gif", "pictures/car4.2.gif", 1.3, 0, 77)
+car_4 = Car("car4", "pictures/car4.gif", "pictures/car4.2.gif", .9, 0, 77)
 car_4.set_car()
 
 # car 5
-car_5 = Car("car5", "pictures/bus1.gif", "pictures/bus1.2.gif", 1.4, 50, 102)
+car_5 = Car("car5", "pictures/bus1.gif", "pictures/bus1.2.gif", .8, 50, 102)
 car_5.set_car()
 
 # car 6
-car_6 = Car("car6", "pictures/truck1.gif", "pictures/truck1.2.gif", 1.7, 100, 85)
+car_6 = Car("car6", "pictures/truck1.gif", "pictures/truck1.2.gif", .7, 100, 85)
 car_6.set_car()
 
 # car 7
-car_7 = Car("car7", "pictures/car5.gif", "pictures/car5.2.gif", 1.6, 150, 69)
+car_7 = Car("car7", "pictures/car5.gif", "pictures/car5.2.gif", .9, 150, 69)
 car_7.set_car()
 
 # car 8
-car_8 = Car("car8", "pictures/bus2.gif", "pictures/bus2.2.gif", 1.2, 200, 87)
+car_8 = Car("car8", "pictures/bus2.gif", "pictures/bus2.2.gif", 1, 200, 87)
 car_8.set_car()
 
 # function
@@ -173,6 +173,7 @@ def exit_menu():
     wn.onkey(None, "Space")
     global  at_menu
     at_menu = False
+    wn.onkey(frog_up, "w")
 
 def open_menu():
     title_pen.write("Welcome to Frogger", align="center", font=("Courier", 24, "normal"))
@@ -193,10 +194,10 @@ def open_menu():
         i.name.goto(650, i.ypos)
     global at_menu
     at_menu = True
+    wn.onkey(None, "w")
 
 # keyboard binding
 wn.listen()
-wn.onkey(frog_up, "w")
 
 # main game loop
 while True:
