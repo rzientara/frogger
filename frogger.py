@@ -9,7 +9,7 @@ wn.tracer(0)
 
 at_menu = True
 
-#score
+# score
 score = 0
 lives = 3
 random_side = [-1, 1]
@@ -142,24 +142,29 @@ def change_speed(car):
         car.dx = random.uniform(-1, -2)
 
 def menu_up():
+    # select top option
     start_pen.clear()
     start_pen.color("light green")
     start_pen.write("Start", align="center", font=("Courier", 24, "bold"))
 
+    # deselect bottom option
     exit_pen.clear()
     exit_pen.color("white")
     exit_pen.write("Exit", align="center", font=("Courier", 24, "normal"))
 
 def menu_down():
+    # select bottom option
     exit_pen.clear()
     exit_pen.color("light green")
     exit_pen.write("Exit", align="center", font=("Courier", 24, "bold"))
 
+    # deselect bottom option
     start_pen.clear()
     start_pen.color("white")
     start_pen.write("Start", align="center", font=("Courier", 24, "normal"))
 
 def exit_menu():
+    # display game and hide menu
     title_pen.clear()
     start_pen.clear()
     exit_pen.clear()
@@ -168,33 +173,45 @@ def exit_menu():
     wn.bgpic("pictures/road.gif")
     score_pen.write("Score: 0", align="center", font=("Courier", 24, "normal"))
     lives_pen.write("lives: {}".format(lives), align="center", font=("Courier", 24, "normal"))
+
+    # disable menu keys and enable frog key
     wn.onkey(None, "Up")
     wn.onkey(None, "Down")
     wn.onkey(None, "Space")
-    global  at_menu
-    at_menu = False
     wn.onkey(frog_up, "w")
 
+    global  at_menu
+    at_menu = False
+
+
 def open_menu():
+    # display menu and hide game
     title_pen.write("Welcome to Frogger", align="center", font=("Courier", 24, "normal"))
     start_pen.write("Start", align="center", font=("Courier", 24, "bold"))
     exit_pen.write("Exit", align="center", font=("Courier", 24, "normal"))
+    wn.bgpic("nopic")
+    wn.bgcolor("black")
     score_pen.clear()
     lives_pen.clear()
     frog.hideturtle()
-    wn.bgpic("nopic")
-    wn.bgcolor("black")
-    global score
-    global lives
     global cars
-    score = 0
-    lives = 3
     for i in cars:
         i.name.hideturtle()
         i.name.goto(650, i.ypos)
+
+    # reset score and lives
+    global score
+    global lives
+    score = 0
+    lives = 3
+
+    # disable frog key
+    wn.onkey(None, "w")
+
     global at_menu
     at_menu = True
-    wn.onkey(None, "w")
+
+
 
 # keyboard binding
 wn.listen()
