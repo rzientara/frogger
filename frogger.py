@@ -7,12 +7,17 @@ wn.bgcolor("black")
 wn.setup(width=1200, height=600)
 wn.tracer(0)
 
+# variables
 at_menu = True
-
-# score
 score = 0
 lives = 3
 random_side = [-1, 1]
+
+# high score variables
+letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+letters_chosen = ["_", "_", "_"]
+letter_amount = 0
+letter_number = 0
 
 # frog
 frog = turtle.Turtle()
@@ -378,6 +383,7 @@ while True:
         if frog.xcor() > i.name.xcor() - i.hitbox and frog.xcor() < i.name.xcor() + i.hitbox and frog.ycor() < i.name.ycor() + 35 and frog.ycor() > i.name.ycor() - 45:
             lives = lose_life(lives)
 
+    # out of lives
     if lives < 4:
         wn.bgpic("nopic")
         wn.bgcolor("black")
@@ -391,11 +397,7 @@ while True:
         # disable frog key
         wn.onkey(None, "w")
 
-        letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-        letters_chosen = ["_", "_", "_"]
-        letter_amount = 0
-        letter_number = 0
-
+        # high score menu
         high_score_s = True
         while high_score_s:
             if letter_amount < 3:
@@ -413,7 +415,7 @@ while True:
                 title_pen.clear()
                 high_score_pen.clear()
                 high_score_s = False
-                
+
         # reset score and lives
         score = 0
         lives = 3
