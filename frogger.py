@@ -384,7 +384,7 @@ while True:
             lives = lose_life(lives)
 
     # out of lives
-    if lives < 4:
+    if lives < 0:
         wn.bgpic("nopic")
         wn.bgcolor("black")
         score_pen.clear()
