@@ -1,5 +1,6 @@
 import turtle
 import random
+import os, sys
 
 wn = turtle.Screen()
 wn.title("frogger")
@@ -9,6 +10,8 @@ wn.tracer(0)
 
 # variables
 at_menu = True
+play_game = True
+quit_game = False
 score = 0
 lives = 3
 random_side = [-1, 1]
@@ -58,13 +61,13 @@ exit_pen.hideturtle()
 exit_pen.goto(0, -20)
 exit_pen.write("Exit", align="center", font=("Courier", 24, "normal"))
 
-# high score pen
-high_score_pen = turtle.Turtle()
-high_score_pen.speed(0)
-high_score_pen.color("light green")
-high_score_pen.penup()
-high_score_pen.hideturtle()
-high_score_pen.goto(0, 20)
+# name pen
+name_pen = turtle.Turtle()
+name_pen.speed(0)
+name_pen.color("light green")
+name_pen.penup()
+name_pen.hideturtle()
+name_pen.goto(0, 20)
 
 # score pen
 score_pen = turtle.Turtle()
@@ -155,47 +158,59 @@ def change_speed(car):
         car.dx = random.uniform(-1, -2)
 
 def menu_up():
+    global play_game
+    global quit_game
+
     # select top option
     start_pen.clear()
     start_pen.color("light green")
     start_pen.write("Start", align="center", font=("Courier", 24, "bold"))
+    play_game = True
 
     # deselect bottom option
     exit_pen.clear()
     exit_pen.color("white")
     exit_pen.write("Exit", align="center", font=("Courier", 24, "normal"))
+    quit_game = False
 
 def menu_down():
+    global play_game
+    global quit_game
+
     # select bottom option
     exit_pen.clear()
     exit_pen.color("light green")
     exit_pen.write("Exit", align="center", font=("Courier", 24, "bold"))
+    quit_game = True
 
     # deselect bottom option
     start_pen.clear()
     start_pen.color("white")
     start_pen.write("Start", align="center", font=("Courier", 24, "normal"))
+    play_game = False
 
 def exit_menu():
-    # display game and hide menu
-    title_pen.clear()
-    start_pen.clear()
-    exit_pen.clear()
-    frog.showturtle()
-    car_1.name.showturtle()
-    wn.bgpic("pictures/road.gif")
-    score_pen.write("Score: 0", align="center", font=("Courier", 24, "normal"))
-    lives_pen.write("lives: {}".format(lives), align="center", font=("Courier", 24, "normal"))
+    if play_game:
+        # display game and hide menu
+        title_pen.clear()
+        start_pen.clear()
+        exit_pen.clear()
+        frog.showturtle()
+        car_1.name.showturtle()
+        wn.bgpic("pictures/road.gif")
+        score_pen.write("Score: 0", align="center", font=("Courier", 24, "normal"))
+        lives_pen.write("lives: {}".format(lives), align="center", font=("Courier", 24, "normal"))
 
-    # disable menu keys and enable frog key
-    wn.onkey(None, "Up")
-    wn.onkey(None, "Down")
-    wn.onkey(None, "Space")
-    wn.onkey(frog_up, "w")
+        # disable menu keys and enable frog key
+        wn.onkey(None, "Up")
+        wn.onkey(None, "Down")
+        wn.onkey(None, "Space")
+        wn.onkey(frog_up, "w")
 
-    global  at_menu
-    at_menu = False
-
+        global  at_menu
+        at_menu = False
+    if quit_game:
+        os._exit(0)
 
 def open_menu():
     # display menu and hide game
@@ -228,10 +243,10 @@ def letter_down():
 
 def select_letter():
     global letter_amount
-    global letters_chosen
+    global letter_number
 
     letter_amount += 1
-
+    letter_number = 0
 
 # start at menu
 wn.listen()
@@ -382,10 +397,10 @@ while True:
     cars = [car_1, car_2, car_3, car_4, car_5, car_6, car_7, car_8]
 
     for i in cars:
-        if frog.xcor() > i.name.xcor() - i.hitbox and frog.xcor() < i.name.xcor() + i.hitbox and frog.ycor() < i.name.ycor() + 35 and frog.ycor() > i.name.ycor() - 45:
+        if i.name.xcor() - i.hitbox < frog.xcor() < i.name.xcor() + i.hitbox and i.name.ycor() + 35 > frog.ycor() > i.name.ycor() - 45:
             lives = lose_life(lives)
 
-    # out of lives
+    # if out of lives, clear game screen
     if lives < 0:
         wn.bgpic("nopic")
         wn.bgcolor("black")
@@ -402,20 +417,22 @@ while True:
         # high score menu
         high_score_s = True
         while high_score_s:
+            wn.update()
             if letter_amount < 3:
+                # keys for name entry
                 wn.onkey(letter_up, "Up")
                 wn.onkey(letter_down, "Down")
                 wn.onkey(select_letter, "space")
-                wn.update()
+
                 letters_chosen[letter_amount] = letters[letter_number]
                 title_pen.write("-New High Score-\n Enter name:", align="center", font=("Courier", 24, "normal"))
-                high_score_pen.clear()
-                high_score_pen.write("{}{}{}".format(letters_chosen[0], letters_chosen[1], letters_chosen[2]), align="center", font=("Courier", 24, "normal"))
+                name_pen.clear()
+                name_pen.write("{}{}{}".format(letters_chosen[0], letters_chosen[1], letters_chosen[2]), align="center", font=("Courier", 24, "normal"))
             else:
                 letter_number = 0
                 letter_amount = 0
                 title_pen.clear()
-                high_score_pen.clear()
+                name_pen.clear()
                 high_score_s = False
 
         # reset score and lives
