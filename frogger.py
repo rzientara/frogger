@@ -1,6 +1,6 @@
 import turtle
 import random
-import os, sys
+import os
 
 wn = turtle.Screen()
 wn.title("frogger")
@@ -8,7 +8,9 @@ wn.bgcolor("black")
 wn.setup(width=1200, height=600)
 wn.tracer(0)
 
+###################
 # variables
+###################
 at_menu = True
 play_game = True
 quit_game = False
@@ -21,6 +23,10 @@ letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
 letters_chosen = ["_", "_", "_"]
 letter_amount = 0
 letter_number = 0
+
+###################
+# turtles
+###################
 
 # frog
 frog = turtle.Turtle()
@@ -85,6 +91,9 @@ lives_pen.penup()
 lives_pen.hideturtle()
 lives_pen.goto(200, 260)
 
+###################
+# classes
+###################
 class Car:
     def __init__(self, name, rightward, leftward, speed, ypos, hitbox):
         self.name = name
@@ -138,7 +147,9 @@ car_7.set_car()
 car_8 = Car("car8", "pictures/bus2.gif", "pictures/bus2.2.gif", 1, 200, 87)
 car_8.set_car()
 
-# function
+###################
+# functions
+###################
 def frog_up():
     y = frog.ycor()
     y += 50
@@ -252,7 +263,9 @@ def select_letter():
 wn.listen()
 open_menu()
 
+###################
 # main game loop
+###################
 while True:
     wn.update()
 
