@@ -203,6 +203,10 @@ def open_menu():
     start_pen.write("Start", align="center", font=("Courier", 24, "bold"))
     exit_pen.write("Exit", align="center", font=("Courier", 24, "normal"))
 
+    wn.onkey(menu_up, "Up")
+    wn.onkey(menu_down, "Down")
+    wn.onkey(exit_menu, "space")
+
     global at_menu
     at_menu = True
 
@@ -229,8 +233,9 @@ def select_letter():
     letter_amount += 1
 
 
-# keyboard binding
+# start at menu
 wn.listen()
+open_menu()
 
 # main game loop
 while True:
@@ -238,9 +243,6 @@ while True:
 
     while at_menu:
         wn.update()
-        wn.onkey(menu_up, "Up")
-        wn.onkey(menu_down, "Down")
-        wn.onkey(exit_menu, "space")
 
     # score
     if frog.ycor() > 250:
