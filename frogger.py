@@ -215,8 +215,8 @@ def exit_menu():
         lives_pen.write("lives: {}".format(lives), align="center", font=("Courier", 24, "normal"))
 
         # disable menu keys and enable frog key
-        wn.onkey(None, "Up")
-        wn.onkey(None, "Down")
+        wn.onkey(None, "w")
+        wn.onkey(None, "s")
         wn.onkey(None, "Space")
         wn.onkey(frog_up, "w")
 
@@ -286,9 +286,18 @@ def clear_game():
         i.name.hideturtle()
         i.name.goto(650, i.ypos)
 
-def close_high_score(number, amount, score, lives):
+def close_high_score():
+    global letter_number
+    global letter_amount
+    global letters_chosen
+    global letters
+    global score
+    global lives
+
     letter_number = 0
     letter_amount = 0
+    for i in range(0, 3):
+        letters_chosen[i] = letters[0]
     title_pen.clear()
     name_pen.clear()
     score = 0
@@ -389,6 +398,6 @@ while True:
                 name_pen.clear()
                 name_pen.write("{}{}{}".format(letters_chosen[0], letters_chosen[1], letters_chosen[2]), align="center", font=("Courier", 24, "normal"))
             else:
-                high_score_s = close_high_score(letter_number, letter_amount, score, lives)
+                high_score_s = close_high_score()
         # reset score and lives
         open_menu()
