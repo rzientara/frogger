@@ -258,6 +258,20 @@ def select_letter():
 
     letter_amount += 1
     letter_number = 0
+def show_car(car):
+    car.name.showturtle()
+    car.name.setx(car.name.xcor() + car.name.dx)
+def reset_car(car, random_side):
+    if car.name.xcor() < -650 or car.name.xcor() > 650:
+        side = random.choice(random_side)
+        car.name.setx(650 * side)
+        car.name.dx *= -1
+        if car.name.dx > 0:
+            car.name.shape(car.rightward)
+        else:
+            car.name.shape(car.leftward)
+        if score > 7:
+            change_speed(car.name)
 
 # start at menu
 wn.listen()
@@ -280,131 +294,43 @@ while True:
         score_pen.write("Score: {}".format(score), align="center", font=("Courier", 24, "normal"))
 
     # move car 1
-    car_1.name.showturtle()
-    car_1.name.setx(car_1.name.xcor() + car_1.name.dx)
-
-    if car_1.name.xcor() < -650 or car_1.name.xcor() > 650:
-        side = random.choice(random_side)
-        car_1.name.setx(650 * side)
-        car_1.name.dx *= -1
-        if car_1.name.dx > 0:
-            car_1.name.shape(car_1.rightward)
-        else:
-            car_1.name.shape(car_1.leftward)
-        if score > 7:
-            change_speed(car_1.name)
+    show_car(car_1)
+    reset_car(car_1, random_side)
 
     # display and move car 2
     if score > 0:
-        car_2.name.showturtle()
-        car_2.name.setx(car_2.name.xcor() + car_2.name.dx)
-
-        if car_2.name.xcor() < -650 or car_2.name.xcor() > 650:
-            side = random.choice(random_side)
-            car_2.name.setx(650 * side)
-            car_2.name.dx *= -1
-            if car_2.name.dx > 0:
-                car_2.name.shape(car_2.rightward)
-            else:
-                car_2.name.shape(car_2.leftward)
-            if score > 7:
-                change_speed(car_2.name)
+        show_car(car_2)
+        reset_car(car_2, random_side)
 
     # display and move car 3
     if score > 1:
-        car_3.name.showturtle()
-        car_3.name.setx(car_3.name.xcor() + car_3.name.dx)
-
-        if car_3.name.xcor() < -650 or car_3.name.xcor() > 650:
-            side = random.choice(random_side)
-            car_3.name.setx(650 * side)
-            car_3.name.dx *= -1
-            if car_3.name.dx > 0:
-                car_3.name.shape(car_3.rightward)
-            else:
-                car_3.name.shape(car_3.leftward)
-            if score > 7:
-                change_speed(car_3.name)
+        show_car(car_3)
+        reset_car(car_3, random_side)
 
     # display and move car 4
     if score > 2:
-        car_4.name.showturtle()
-        car_4.name.setx(car_4.name.xcor() + car_4.name.dx)
-
-        if car_4.name.xcor() < -650 or car_4.name.xcor() > 650:
-            side = random.choice(random_side)
-            car_4.name.setx(650 * side)
-            car_4.name.dx *= -1
-            if car_4.name.dx > 0:
-                car_4.name.shape(car_4.rightward)
-            else:
-                car_4.name.shape(car_4.leftward)
-            if score > 7:
-                change_speed(car_4.name)
+        show_car(car_4)
+        reset_car(car_4, random_side)
 
     # display and move car 5
     if score > 3:
-        car_5.name.showturtle()
-        car_5.name.setx(car_5.name.xcor() + car_5.name.dx)
-
-        if car_5.name.xcor() < -650 or car_5.name.xcor() > 650:
-            side = random.choice(random_side)
-            car_5.name.setx(650 * side)
-            car_5.name.dx *= -1
-            if car_5.name.dx > 0:
-                car_5.name.shape(car_5.rightward)
-            else:
-                car_5.name.shape(car_5.leftward)
-            if score > 7:
-                change_speed(car_5.name)
+        show_car(car_5)
+        reset_car(car_5, random_side)
 
     # display and move car 6
     if score > 4:
-        car_6.name.showturtle()
-        car_6.name.setx(car_6.name.xcor() + car_6.name.dx)
-
-        if car_6.name.xcor() < -650 or car_6.name.xcor() > 650:
-            side = random.choice(random_side)
-            car_6.name.setx(650 * side)
-            car_6.name.dx *= -1
-            if car_6.name.dx > 0:
-                car_6.name.shape(car_6.rightward)
-            else:
-                car_6.name.shape(car_6.leftward)
-            if score > 7:
-                change_speed(car_6.name)
+        show_car(car_6)
+        reset_car(car_6, random_side)
 
     # display and move car 7
     if score > 5:
-        car_7.name.showturtle()
-        car_7.name.setx(car_7.name.xcor() + car_7.name.dx)
-
-        if car_7.name.xcor() < -650 or car_7.name.xcor() > 650:
-            side = random.choice(random_side)
-            car_7.name.setx(650 * side)
-            car_7.name.dx *= -1
-            if car_7.name.dx > 0:
-                car_7.name.shape(car_7.rightward)
-            else:
-                car_7.name.shape(car_7.leftward)
-            if score > 7:
-                change_speed(car_7.name)
+        show_car(car_7)
+        reset_car(car_7, random_side)
 
     # display and move car 8
     if score > 6:
-        car_8.name.showturtle()
-        car_8.name.setx(car_8.name.xcor() + car_8.name.dx)
-
-        if car_8.name.xcor() < -650 or car_8.name.xcor() > 650:
-            side = random.choice(random_side)
-            car_8.name.setx(650 * side)
-            car_8.name.dx *= -1
-            if car_8.name.dx > 0:
-                car_8.name.shape(car_8.rightward)
-            else:
-                car_8.name.shape(car_8.leftward)
-            if score > 7:
-                change_speed(car_8.name)
+        show_car(car_8)
+        reset_car(car_8, random_side)
 
     # hit detection
     cars = [car_1, car_2, car_3, car_4, car_5, car_6, car_7, car_8]
