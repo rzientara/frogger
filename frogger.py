@@ -196,7 +196,7 @@ def menu_down():
     exit_pen.write("Exit", align="center", font=("Courier", 24, "bold"))
     quit_game = True
 
-    # deselect bottom option
+    # deselect top option
     start_pen.clear()
     start_pen.color("white")
     start_pen.write("Start", align="center", font=("Courier", 24, "normal"))
@@ -399,5 +399,5 @@ while True:
                 name_pen.write("{}{}{}".format(letters_chosen[0], letters_chosen[1], letters_chosen[2]), align="center", font=("Courier", 24, "normal"))
             else:
                 high_score_s = close_high_score()
-        # reset score and lives
+
         open_menu()
